@@ -7,7 +7,10 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("https://localhost:3000, https://aurora-front-zeta.vercel.app/")
+        //builder.WithOrigins("https://localhost:3000, https://localhost:7152, https://aurora-front-zeta.vercel.app/")
+        //.AllowAnyHeader()
+        //.AllowAnyMethod();
+        builder.AllowAnyOrigin()
         .AllowAnyHeader()
         .AllowAnyMethod();
     });
@@ -22,5 +25,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors();
 
 app.Run();
