@@ -9,22 +9,19 @@ on:
 jobs:
   publish:
     runs-on: ubunto-latest
+    steps:
+      - uses: actions/checkout@v3
 
-  steps:
-    -uses: actions/checkout@v3
-    
-    -name: setup .Net
-    uses: actions/setup-dotnet@v3
-    width:
-    dotnet-version: '6.0.x'
-    
-    -name: Restore
-    run: dotnet restore ./Aurora_be.sln
+      - name: setup .Net
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
 
-    -name: Build
-    run: dotnet build ./Aurora_be.sln --configuration Release --no-restore
+      - name: Restore
+        run: dotnet restore ./Aurora_be.sln
 
-    -name: Publish
-    run: dotnet publish ./Aurora_be.sln --configuration Release --no-build
-    
-    
+      - name: Build
+        run: dotnet build ./Aurora_be.sln --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish ./Aurora_be.sln --configuration Release --no-build
